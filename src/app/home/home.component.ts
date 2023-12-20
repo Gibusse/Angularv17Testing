@@ -3,7 +3,7 @@ import { HousingLocationComponent } from '../housing-location/housing-location.c
 import { CommonModule } from '@angular/common';
 import { Housinglocation } from '../models/housinglocation';
 import { HousingService } from '../services/housing.service';
-import { Observable, filter, from, map, tap } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
