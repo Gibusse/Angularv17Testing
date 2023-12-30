@@ -10,7 +10,7 @@ import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators }
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template:`
-    <article *ngIf="(housingLocation | async) as location">
+    <article *ngIf="(housingLocation$ | async) as location">
       <img
         class="listing-photo"
         [src]="location?.photo"
@@ -52,7 +52,7 @@ export class DetailsComponent {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private housingService = inject(HousingService);
   private formBuilder = inject(UntypedFormBuilder)
-  public housingLocation: Promise<Housinglocation | undefined>;
+  public housingLocation$: Promise<Housinglocation | undefined>;
   public applyForm = this.formBuilder.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -61,7 +61,7 @@ export class DetailsComponent {
 
   constructor() {
     const housingLocationId = Number(this.route.snapshot.params['id']);
-    this.housingLocation = this.housingService.getHousingLocationById(housingLocationId);
+    this.housingLocation$ = this.housingService.getHousingLocationById(housingLocationId);
   }
 
   public submitApplication(form: UntypedFormGroup) {
